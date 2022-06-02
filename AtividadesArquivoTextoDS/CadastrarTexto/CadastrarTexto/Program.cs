@@ -14,7 +14,6 @@ namespace CadastrarTexto
             //Declaração de váriavies -- Exercício 1 
             string msgDig = "";
             int menu;
-            bool sair = false;
 
             //Declaração de váriaveis -- Exercício 2
             int idade = 0;
@@ -22,72 +21,72 @@ namespace CadastrarTexto
 
             //MENU
             Console.Clear();
-            Console.WriteLine("==== MENU ===\n[ 1 ] Gravar mensagem\n[ 2 ] Ler um TXT\n[ 0 ] Sair");
-            Console.Write("Digite a opção desejada: "); menu = int.Parse(Console.ReadLine());
+            Console.WriteLine("============= MENU ============\n[ 1 ] Gravar mensagem em um TXT\n[ 2 ] Ler um arquivo TXT\n[ 3 ] Gravar em um binário\n[ 4 ] Ler um arquivo binário\n[ 0 ] Sair");
+            Console.Write("\nDigite a opção desejada: "); menu = int.Parse(Console.ReadLine());
 
             //Opções do MENU
-            do
+            switch (menu)
             {
-                switch (menu)
-                {
-                    case 0:
-                        sair = true;
-                        break;
+                case 0:
+                    Console.Clear();
+                    Console.WriteLine("Saindo...");
+                    break;
+                    
+                case 1:
+                    Console.Clear();
+                    Console.Write("Digite a mensagem: "); msgDig = Console.ReadLine(); //Recebe as informações na var 'msgDig'
+                    StreamWriter mensagem = new StreamWriter(@"C:\Users\Aluno\Desktop\CadastrarTexto\arquivos\arquivo.txt", true); //Declara o objeto writer 'mensagem' -- Caminho onde ficará o arquivo
+                    mensagem.WriteLine(msgDig); //Passa o texto da var msgDig para o objeto writer mensagem
+                    mensagem.Close();
+                    break;
 
-                    case 1:
+                case 2:
+                    //Erro na hora da leitura pode ser problema: no caminho do arquivo, ou se ele existe
+                    StreamReader lerMsg = new StreamReader(@"C:\Users\Aluno\Desktop\CadastrarTexto\arquivos\arquivo.txt"); //Caminho de onde está o arquivo para ser lido
+                    while (!lerMsg.EndOfStream)
+                    {
+                        string linha = lerMsg.ReadLine();
                         Console.Clear();
-                        Console.Write("Digite a mensagem: "); msgDig = Console.ReadLine(); //Recebe as informações na var 'msgDig'
-                        StreamWriter mensagem = new StreamWriter(@"C:\Users\Usuario\Desktop\AtividadesArquivoTextoDS\CadastrarTexto\CadastrarTexto\arquivosTexto\arquivo.txt", true); //Declara o objeto writer 'mensagem'
-                        mensagem.WriteLine(msgDig); //Passa o texto da var msgDig para o objeto writer mensagem
-                        mensagem.Close();
-                        break;
+                        Console.WriteLine($"Texto do arquivo: \n\n{linha}");
+                    }
+                    break;
 
-                    case 2:
-                        StreamReader lerMsg = new StreamReader(@"C:\Users\Usuario\Desktop\AtividadesArquivoTextoDS\CadastrarTexto\CadastrarTexto\arquivosTexto\arquivo.txt");
-                        while (!lerMsg.EndOfStream)
-                        {
-                            string linha = lerMsg.ReadLine();
-                            Console.WriteLine(linha);
-                        }
-                        break;
+                case 3:
+                    Console.Clear();
+                    Console.WriteLine("Digite as informações pedidas: ");
+                    Console.Write("\nNome: "); nome = Console.ReadLine();
+                    Console.Write("\nEmail: "); email = Console.ReadLine();
+                    Console.Write("\nIdade: "); idade = int.Parse(Console.ReadLine());
 
-                    case 3:
-                        Console.Clear();
-                        Console.WriteLine("Digite as informações pedidas: ");
-                        Console.Write("\nNome: "); nome = Console.ReadLine();
-                        Console.Write("\nEmail: "); email = Console.ReadLine();
-                        Console.Write("\nIdade: "); idade = int.Parse(Console.ReadLine());
+                    FileStream arqBin = new FileStream(@"C:\Users\Aluno\Desktop\CadastrarTexto\arquivos\arquivo.bin", FileMode.Create); 
+                    BinaryWriter writer = new BinaryWriter(arqBin);
+                    writer.Write(nome);
+                    writer.Write(email);
+                    writer.Write(idade);
+                    writer.Flush();
+                    writer.Close();
+                    break;
 
-                        FileStream stream1 = new FileStream(@"C:\Users\Usuario\Desktop\AtividadesArquivoTextoDS\CadastrarTexto\CadastrarTexto\arquivosTexto\arquivo.bin", FileMode.Create);
-                        BinaryWriter writer = new BinaryWriter(stream1);
-                        writer.Write(nome);
-                        writer.Write(email);
-                        writer.Write(idade);
-                        writer.Flush();
-                        writer.Close();
-                        break;
+                case 4:
+                    //Erro na hora da leitura pode ser problema: no caminho do arquivo, ou se ele existe
+                    FileStream arqBinAb = new FileStream(@"C:\Users\Aluno\Desktop\CadastrarTexto\arquivos\arquivo.bin", FileMode.Open);
+                    BinaryReader reader = new BinaryReader(arqBinAb);
 
-                    case 4:
-                        FileStream stream2 = new FileStream(@"C:\Users\Usuario\Desktop\AtividadesArquivoTextoDS\CadastrarTexto\CadastrarTexto\arquivosTexto\arquivo.bin", FileMode.Open);
-                        BinaryReader reader = new BinaryReader(stream2);
+                    string nome1 = reader.ReadString();
+                    string email1 = reader.ReadString();
+                    int idade1 = reader.ReadInt32();
 
-                        string nome1 = reader.ReadString();
-                        string email1 = reader.ReadString();
-                        int idade1 = reader.ReadInt32();
+                    reader.Close();
+                    Console.Clear();
+                    Console.Write($"Informações do arquivo bin:\n\nNome: {nome1}\n\nEmail: {email1}\n\nIdade: {idade1}");
 
-                        reader.Close();
+                    break;
 
-                        Console.Write($"Informações do arquivo bin:\nNome: {nome1}\nEmail: {email1}\nIdade: {idade1}");
-
-                        break;
-
-                    default:
-                        Console.WriteLine("Opção Inválida!");
-                        break;
-                }
-            } while (sair != false);
+                default:
+                    Console.WriteLine("Opção Inválida!");
+                    break;
+            }
             Console.ReadKey();
-
         }
     }
 }
