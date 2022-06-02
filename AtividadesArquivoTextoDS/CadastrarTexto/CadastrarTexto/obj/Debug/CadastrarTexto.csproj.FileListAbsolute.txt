@@ -1,0 +1,7 @@
+C:\Users\Usuario\Desktop\AtividadesArquivoTextoDS\CadastrarTexto\CadastrarTexto\bin\Debug\CadastrarTexto.exe.config
+C:\Users\Usuario\Desktop\AtividadesArquivoTextoDS\CadastrarTexto\CadastrarTexto\bin\Debug\CadastrarTexto.exe
+C:\Users\Usuario\Desktop\AtividadesArquivoTextoDS\CadastrarTexto\CadastrarTexto\bin\Debug\CadastrarTexto.pdb
+C:\Users\Usuario\Desktop\AtividadesArquivoTextoDS\CadastrarTexto\CadastrarTexto\obj\Debug\CadastrarTexto.csproj.AssemblyReference.cache
+C:\Users\Usuario\Desktop\AtividadesArquivoTextoDS\CadastrarTexto\CadastrarTexto\obj\Debug\CadastrarTexto.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Desktop\AtividadesArquivoTextoDS\CadastrarTexto\CadastrarTexto\obj\Debug\CadastrarTexto.exe
+C:\Users\Usuario\Desktop\AtividadesArquivoTextoDS\CadastrarTexto\CadastrarTexto\obj\Debug\CadastrarTexto.pdb
